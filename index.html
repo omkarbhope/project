@@ -45,7 +45,12 @@
 <body>
 
 <form action="{{ url_for('get_data') }}" method="POST" class="slidecontainer">
+        <h3>Red</h3>
         <input type="range" min="0" value = "50" max="255" value="50" class="slider" name="red">
+        <h3>Blue</h3>
+        <input type="range" min="0" value = "50" max="255" value="50" class="slider" name="blue">
+        <h3>Green</h3>
+        <input type="range" min="0" value = "50" max="255" value="50" class="slider" name="green">
         <input type="submit">
     </form>
 

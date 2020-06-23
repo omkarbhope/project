@@ -4,27 +4,28 @@ from camera import VideoCamera
 
 app = Flask(__name__)
 _red = 0
+_green = 0
+_blue = 0
 @app.route('/')
 def index():
     return render_template('index.html')
     
 @app.route("/get_data", methods=["POST"])
 def get_data():
-    global _red
+    global _red,_green,_blue
     if request.method == "POST":
         red = int(request.form["red"])
-        # green = request.form["green"]
-        # blue = request.form["blue"]
+        green = int(request.form["green"])
+        blue = int(request.form["blue"])
         _red = red
-        print(_red)
+        _blue = blue
+        _green = green
         return redirect(url_for('index'))
 
 
 def gen(camera):
-    # red,blue,green = get_data()
     while True:
-        print(_red)
-        frame = camera.get_frame(_red)
+        frame = camera.get_frame(_red,_blue,_green)
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 

@@ -17,7 +17,7 @@ class VideoCamera(object):
         self.video.release()
 
     # returns camera frames along with bounding boxes and predictions
-    def get_frame(self,red):
+    def get_frame(self,red,blue,green):
         _, fr = self.video.read()
         output = fr.copy()
         gray_fr = cv2.cvtColor(fr, cv2.COLOR_BGR2GRAY)
@@ -34,10 +34,10 @@ class VideoCamera(object):
             for n in range(0, 68):
                 pts_array = np.array([l(54),l(55),l(56),l(57),l(58),l(59),l(48),l(60),l(67),l(66),l(65),l(64)],np.int32)
                 pts_array = pts_array.reshape((-1,1,2))
-                cv2.fillPoly(fr,[pts_array],(0,0,red))
+                cv2.fillPoly(fr,[pts_array],(blue,green,red))
                 pts_array2 = np.array([l(48),l(49),l(50),l(51),l(52),l(53),l(54),l(64),l(63),l(62),l(61),l(60)],np.int32)
                 pts_array2 = pts_array2.reshape((-1,1,2))
-                cv2.fillPoly(fr,[pts_array2],(0,0,red))
+                cv2.fillPoly(fr,[pts_array2],(blue,green,red))
 
         # for (x, y, w, h) in faces:
         #     fc = gray_fr[y:y+h, x:x+w]
