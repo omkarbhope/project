@@ -10,8 +10,9 @@ def index():
     
 @app.route("/get_data", methods=["POST"])
 def get_data():
+    global _red
     if request.method == "POST":
-        red = request.form["red"]
+        red = int(request.form["red"])
         # green = request.form["green"]
         # blue = request.form["blue"]
         _red = red
